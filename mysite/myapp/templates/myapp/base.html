@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <span class="navbar-brand">Calorie Tracker</span>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0; border: none; background: none;">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
